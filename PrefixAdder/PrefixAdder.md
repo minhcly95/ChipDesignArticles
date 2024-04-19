@@ -64,7 +64,7 @@ Như vậy, `C[i]` vẫn phải đi qua `N` cụm `AND-OR` (màu đỏ trong hì
 ## Generate và Propagate trên khoảng
 Ngoài `G[i]` và `P[i]` cho từng bit, chúng ta cũng có `G[j:i]` và `P[j:i]` cho một khoảng bit từ bit `j` đến bit `i`:
 - `G[j:i] = 1` nếu `C[j+1]` **luôn** bằng `1`, tức `G[j:i] = C[j+1]` khi `C[i] = 0`.
-- `P[j:i] = 1` nếu `C[j+1]` **có thể** bằng `1`, tức `G[j:i] = C[j+1]` khi `C[i] = 1`.
+- `P[j:i] = 1` nếu `C[j+1]` **có thể** bằng `1`, tức `P[j:i] = C[j+1]` khi `C[i] = 1`.
 
 Tương tự với trường hợp 1 bit, ta có:
 ```
