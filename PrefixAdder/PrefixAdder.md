@@ -53,7 +53,7 @@ Với `G[i]` và `P[i]`, ta có thể tính bit nhớ bằng công thức:
 ```
 C[i+1] = G[i] | P[i] & C[i]
 ```
-Công thức này nghĩa là `C[i+1] = 1` nếu bit nhớ được sinh ra ngay tại đây, hoặc là nó được truyền từ bit trước (và bit trước có nhớ). 
+Công thức này nghĩa là `C[i+1] = 1` nếu bit nhớ được sinh ra ngay tại đây (`G[i] = 1`), hoặc là nó được truyền từ bit trước (`P[i] = 1`) và bit trước có nhớ (`C[i] = 1`). 
 Sử dụng công thức này, ta có thể vẽ lại mạch như sau:
 
 ![](figures/GPAdd.png)
