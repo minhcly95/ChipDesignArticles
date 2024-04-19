@@ -29,20 +29,20 @@ Tuy nhiên, làm thế nào để có thể biết được hết các bit nhớ
 Chúng ta sẽ tạo ra một logic riêng để tính toán các bit nhớ này một cách nhanh nhất.
 
 Với mỗi bit `i` (từ `0` tới `N-1`), ta tạo ra 2 biến:
-- `G[i]`: bằng `1` nếu bit `i` sinh nhớ (generate), khi mà
-`Cout = C[i+1]` của bit này luôn là `1`, **không phụ thuộc** vào `Cin = C[i]`.
-- `P[i]`: bằng `1` nếu bit `i` truyền nhớ (propagate), khi mà
-`Cout` của bit này **phụ thuộc** `Cin`, tức nếu `Cin = 0` thì `Cout = 0`, nếu `Cin = 1` thì `Cout = 1`.
+- `G[i]`: bằng `1` nếu bit `i` sinh nhớ (generate), khi mà `Cout = C[i+1]` của bit này **luôn** bằng 1, bất kể giá trị của `Cin = C[i]`.
+Đơn giản là `G[i] = Cout` khi `Cin = 0`.
+- `P[i]`: bằng `1` nếu bit `i` truyền nhớ (propagate), khi mà `Cout` của bit này **có thể** bằng 1, tùy vào `Cin`.
+Đơn giản là `P[i] = Cout` khi `Cin = 1`.
 
 Hai biến `G[i]` và `P[i]` chỉ phụ thuộc vào `A[i]` và `B[i]` mà không phụ thuộc vào `C[i]` (xem bảng).
 Do đó, chúng có thể được tính ngay khi ta nhận được `A` và `B` mà không cần phải chờ vào các bit nhớ `C[i]`.
 
-| `A[i]` | `B[i]` | `Cout` | `G[i]` | `P[i]` |
-| --- | --- | --- | --- | --- |
-| 0 | 0 | `Cout = 0` | 0 | 0 |
-| 0 | 1 | `Cout = Cin` | 0 | 1 |
-| 1 | 0 | `Cout = Cin` | 0 | 1 |
-| 1 | 1 | `Cout = 1` | 1 | 0 |
+| `A[i]` | `B[i]` | `G[i] = Cout` khi `Cin = 0` | `P[i] = Cout` khi `Cin = 1`
+| --- | --- | --- | --- |
+| 0 | 0 | 0 | 0 |
+| 0 | 1 | 0 | 1 |
+| 1 | 0 | 0 | 1 |
+| 1 | 1 | 1 | 1 |
 
 ```
 G[i] = A[i] & B[i]
@@ -63,8 +63,8 @@ Như vậy, `C[i]` vẫn phải đi qua `N` cụm `AND-OR` (màu đỏ trong hì
 
 ## Generate và Propagate trên khoảng
 Ngoài `G[i]` và `P[i]` cho từng bit, chúng ta cũng có `G[j:i]` và `P[j:i]` cho một khoảng bit từ bit `j` đến bit `i`:
-- `G[j:i] = 1` nếu `C[j+1]` luôn bằng `1` và không phụ thuộc vào `C[i]`.
-- `P[j:i] = 1` nếu `C[j+1]` phụ thuộc vào `C[i]`, tức là `C[j+1] = C[i]`.
+- `G[j:i] = 1` nếu `C[j+1]` **luôn** bằng `1`, tức `G[j:i] = C[j+1]` khi `C[i] = 1`.
+- `P[j:i] = 1` nếu `C[j+1]` **có thể** bằng `1`, tức `G[j:i] = C[j+1]` khi `C[i] = 0`.
 
 Tương tự với trường hợp 1 bit, ta có:
 ```
