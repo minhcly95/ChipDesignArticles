@@ -70,7 +70,7 @@ ta chia biểu thức thành `N` trường hợp:
 Nếu `L[N-2] = 1` thì `A < B`.
 - Nếu 2 chữ số đầu bằng nhau, tức `E[N-1] = E[N-2] = 1`, thì ta xét chữ số thứ 3.
 Nếu `L[N-3] = 1` thì `A < B`.
-- và vâng vâng...
+- và vân vân...
 
 Chỉ cần 1 trường hợp đúng thì `A < B`. Do đó, ta có biểu thức tổng hợp như sau (`LT = 1` khi `A < B`):
 ```
