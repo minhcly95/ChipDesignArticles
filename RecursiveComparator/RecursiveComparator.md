@@ -158,7 +158,6 @@ module comparator #(parameter N = 8)(
 );
     localparam M = N/2;
 
-    genvar i;
     generate
         if (N === 1) begin
             // Base case: so sanh 1 bit
