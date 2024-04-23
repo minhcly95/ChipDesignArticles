@@ -97,20 +97,22 @@ Giả sử rằng bạn đã có (nhiều) bộ so sánh 4 bit (từ chip có s�
 Vấn đề là làm thế nào để bạn có thể ghép chúng lại với nhau nhằm tạo ra một bộ so sánh lớn hơn?
 
 Chúng ta sẽ dùng 2 bộ so sánh 4 bit.
-Ta sẽ sử dụng bộ so sánh đầu tiên để so sánh 4 bit cao `A[7:4]` và `B[7:4]`, trả về `Ehigh` và `Lhigh`.
-`Ehigh = 1` nếu `A[7:4] == B[7:4]` và `Lhigh = 1` nếu `A[7:4] < B[7:4]`.
-Tương tự, ta sử dụng bộ so sánh còn lại để so sánh 4 bit thấp `A[3:0]` và `B[3:0]`, trả về `Elow` và `Llow`.
+Ta sẽ sử dụng bộ so sánh đầu tiên để so sánh 4 bit cao `Ahigh = A[7:4]` và `Bhigh = B[7:4]`, trả về `Ehigh` và `Lhigh`.
+`Ehigh = 1` nếu `Ahigh == Bhigh` và `Lhigh = 1` nếu `Ahigh < Bhigh`.
+Tương tự, ta sử dụng bộ so sánh còn lại để so sánh 4 bit thấp `Alow = A[3:0]` và `Blow = B[3:0]`, trả về `Elow` và `Llow`.
 
-> `Ehigh` và `Lhigh` không thể nào cùng bằng 1, do `A[7:4] == B[7:4]` và `A[7:4] < B[7:4]` không thể đồng thời xảy ra.
+> `Ehigh` và `Lhigh` không thể nào cùng bằng 1, do `Ahigh == Bhigh` và `Ahigh < Bhigh` không thể đồng thời xảy ra.
 > Tương tự, `Elow` và `Llow` cũng không thể nào cùng bằng 1.
 
 Sau đó, ta xét các trường hợp sau:
-- Nếu `Ehigh = 0` và `Lhigh = 0`, tức là `A[7:4] > B[7:4]`, thì `A > B`.
-- Nếu `Lhigh = 1`, tức là `A[7:4] < B[7:4]`, thì `A < B`.
-- Nếu `Ehigh = 1`, tức là `A[7:4] == B[7:4]`, thì ta xét tiếp `Elow` với `Llow`:
+- Nếu `Ehigh = 0` và `Lhigh = 0`, tức là `Ahigh > Bhigh`, thì `A > B`.
+- Nếu `Lhigh = 1`, tức là `Ahigh < Bhigh`, thì `A < B`.
+- Nếu `Ehigh = 1`, tức là `Ahigh == Bhigh`, thì ta xét tiếp `Elow` với `Llow`:
     - Nếu `Elow = 0` và `Llow = 0`, thì `A > B`.
     - Nếu `Llow = 1`, thì `A < B`.
     - Nếu `Elow = 1`, thì `A == B`.
+
+![](figures/CompCases.png)
 
 Cho nên, chúng ta có thể đúc kết được rằng:
 ```
