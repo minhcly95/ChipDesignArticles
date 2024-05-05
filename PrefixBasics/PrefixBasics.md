@@ -1,6 +1,7 @@
 # Căn bản về giải thuật tính Prefix song song
 
 Trong thiết kế, nhiều khi chúng ta gặp những biểu thức cộng dồn dưới dạng:
+
 $$
 \begin{aligned}
 Y_0 &= A_0 \\
@@ -23,6 +24,7 @@ Kỹ thuật này nói chung được gọi là *giải thuật tính prefix son
 ## Tính OR cộng dồn
 Cho một mảng 8 bit $[A_7, A_6, \ldots, A_0]$, bài toán đầu tiên của chúng ta
 là tạo ra một mạch để tính một mảng OR cộng dồn cũng 8 bit $[Y_7, Y_6, \ldots, Y_0]$ sao cho:
+
 $$
 \begin{aligned}
 Y_0 &= A_0 \\
@@ -44,12 +46,15 @@ trả về 1 cho những bit bên trái bit đó.
 > Mã theo dạng `11111000` hay `11100000` được gọi là mã nhiệt kế (thermometer code).
 
 Đầu tiên, ta gọi:
+
 $$ A_{i:j} = A_i + A_{i+1} + \cdots + A_j $$
+
 Ví dụ, $A_{5:2} = A_5 + A_4 + A_3 + A_2$. Theo định nghĩa này thì ta có $Y_0 = A_{0:0}$, $Y_1 = A_{1:0}$, $Y_2 = A_{2:0}$,
 và vân vân.
 
 Giả sử rằng ta chỉ cần tính $Y_7$. Để tính $Y_7 = A_{7:0}$ trong `log N` bước là một chuyện khá là đơn giản.
 Ta sẽ tính OR theo từng cặp trong bước 1 (tứ kết):
+
 $$
 \begin{aligned}
 A_{7:6} &= A_7 + A_6 &\qquad 
@@ -58,17 +63,22 @@ A_{3:2} &= A_3 + A_2 &\qquad
 A_{1:0} &= A_1 + A_0
 \end{aligned}
 $$
+
 Sau đó ta ghép 2 cặp liền kề với nhau trong bước 2 (bán kết):
+
 $$
 \begin{aligned}
 A_{7:4} &= A_{7:6} + A_{5:4} &\qquad
 A_{3:0} &= A_{3:2} + A_{1:0}
 \end{aligned}
 $$
+
 Và trong bước 3, ta tính OR của cặp còn lại (chung kết):
+
 $$
 Y_7 = A_{7:0} = A_{7:4} + A_{3:0}
 $$
+
 Các bước tính toán trên có thể được biểu diễn dưới dạng cây:
 
 ![](figures/OrTree7.png)
@@ -78,7 +88,9 @@ Ta có thể thấy là mỗi khi ta gộp $A_{i:j}$ và $A_{j+1:k}$ lại với
 Vấn đề bây giờ của chúng ta là tính tất cả $Y_7, Y_6, \ldots, Y_0$ cùng một lúc trong `log N` bước (mà sử dụng ít cổng logic nhất có thể).
 Chúng ta làm điều này bằng cách chỉnh sửa cái cây dùng để tính $Y_7$.
 Ta bắt đầu với $Y_6 = A_{6:0}$. Sử dụng các dữ kiện đã sử dụng cho $Y_7$, ta có thể thấy:
+
 $$ Y_6 = A_{6:0} = A_6 + A_{5:4} + A_{3:0} $$
+
 Như vậy, chúng ta chỉ cần gộp $A_6$ và $A_{5:4}$ thành $A_{6:4}$, sau đó gộp nó với $A_{3:0}$ để tạo thành $A_{6:0}$.
 
 ![](figures/OrTree6.png)
@@ -105,6 +117,7 @@ Cho nên, một cây prefix rộng 32 bit chỉ cần 5 tầng:
 
 ## Tính AND cộng dồn
 Tương tự với bài toán OR cộng dồn, ta cũng có bài toán AND cộng dồn.
+
 $$
 \begin{aligned}
 Y_0 &= A_0 \\
