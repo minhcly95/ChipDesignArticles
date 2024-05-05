@@ -10,12 +10,8 @@ module pe_onehot #(
     prefix_or_rev #(N) tree(a, x);
 
     // Edge detection
-    always_comb begin
-        y[N-1] = x[N-1];
-        for (int i = 0; i < N - 1; i++) begin
-            y[i] = x[i] & ~x[i+1];
-        end
-    end
+    assign y[N-1] = x[N-1];
+    assign y[N-2:0] = x[N-2:0] & ~x[N-1:1];
 endmodule
 
 module prefix_or_rev #(
