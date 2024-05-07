@@ -47,7 +47,7 @@ trả về 1 cho những bit bên trái bit đó.
 
 Đầu tiên, ta gọi:
 
-$$ A_{i:j} = A_i + A_{i+1} + \cdots + A_j $$
+$$ A_{j:i} = A_j + A_{j-1} + A_{j-2} + \cdots + A_{i+1} + A_i $$
 
 Ví dụ, $A_{5:2} = A_5 + A_4 + A_3 + A_2$. Theo định nghĩa này thì ta có $Y_0 = A_{0:0}$, $Y_1 = A_{1:0}$, $Y_2 = A_{2:0}$,
 và vân vân.
@@ -83,7 +83,7 @@ Các bước tính toán trên có thể được biểu diễn dưới dạng c
 
 ![](figures/OrTree7.png)
 
-Ta có thể thấy là mỗi khi ta gộp $A_{i:j}$ và $A_{j+1:k}$ lại với nhau thì ta sẽ có $A_{i:k}$.
+Ta có thể thấy là mỗi khi ta gộp $A_{k:j}$ và $A_{j-1:i}$ lại với nhau thì ta sẽ có $A_{k:i}$.
 
 Vấn đề bây giờ của chúng ta là tính tất cả $Y_7, Y_6, \ldots, Y_0$ cùng một lúc trong `log N` bước (mà sử dụng ít cổng logic nhất có thể).
 Chúng ta làm điều này bằng cách chỉnh sửa cái cây dùng để tính $Y_7$.
