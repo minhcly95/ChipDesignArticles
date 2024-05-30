@@ -163,7 +163,7 @@ cho kênh nhận, hay là `Empty` và `Pop` (còn gọi là `ReadEnable`) cho k�
 Ở đầu bên kia, chúng ta chỉ xử lý một giao dịch ghi (tín hiệu `WReqIn`) khi kênh `AW` và `W` có dữ liệu, và kênh `B` còn chỗ trống.
 Logic này được thực hiện ở khối `Write Request In`. Khối `Read Request In` cũng tương tự nhưng cho giao dịch đọc.
 Sau một số khối để xử lý địa chỉ đầu vào (`Addr Decoder` và `Lane Enabler`),
-dữ liệu được ghi và đọc và một register file có 2 cổng ghi đọc riêng biệt.
+dữ liệu được ghi và đọc vào một register file có 2 cổng ghi đọc riêng biệt.
 
 ## So sánh APB, AHB, và AXI
 Dựa vào nguyên lý hoạt động, ta có bảng so sánh sau đây:
@@ -187,5 +187,8 @@ Nếu các bạn muốn tìm hiểu hơn về ba giao thức này, xin hãy tham
 
 ## Tham khảo
 1. APB specification: https://developer.arm.com/documentation/ihi0024/latest/
-1. AHB specification: https://developer.arm.com/documentation/ihi0033/latest/
-1. AXI specification: https://developer.arm.com/documentation/ihi0022/latest/
+2. AHB specification: https://developer.arm.com/documentation/ihi0033/latest/
+3. AXI specification: https://developer.arm.com/documentation/ihi0022/latest/
+4. Thiết kế tham khảo: [APB register](https://github.com/minhcly95/ChipDesignPractice/tree/main/apb_register),
+[AHB register](https://github.com/minhcly95/ChipDesignPractice/tree/main/ahb_register),
+[AXI register](https://github.com/minhcly95/ChipDesignPractice/tree/main/axi_register)
